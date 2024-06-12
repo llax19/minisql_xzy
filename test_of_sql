@@ -1,0 +1,74 @@
+-- 创建数据库
+create database db0;
+create database db1;
+create database db2;
+
+show databases;
+
+use db0;
+
+create table account(
+  id int,
+  name char(16),
+  balance float,
+  primary key(id)
+);
+
+/Users/apple/Desktop/杂项/sql_gen 2/account00.txt
+/Users/apple/Desktop/杂项/sql_gen 2/account01.txt
+/Users/apple/Desktop/杂项/sql_gen 2/account02.txt
+
+insert into account values(12500000, "name00000", 100.0);
+insert into account values(12500001, "name00001", 101.0);
+insert into account values(12500002, "name00002", 102.0);
+
+select * from account;
+
+select * from account where id = 12500000;
+select * from account where balance = 119.4;
+select * from account where name = "name00001";
+
+-- 多条件查询与投影操作
+select id, name from account where balance >= 100.0 and balance < 200.0;
+select name, balance from account where balance > 100.0 and id < 12501000;
+select * from account where id < 12500200 and name < "name00100";
+
+-- 创建索引
+create index idx01 on account(name);
+
+-- 使用索引查询
+select * from account where name = "name06789";
+
+-- 删除操作
+delete from account where name = "name05678";
+
+-- 插入操作，测试唯一约束
+-- 假设这里插入的是之前删除的记录
+insert into account values(12500000, "name05678", 887.0);
+
+-- 更新操作
+update account set id = 12500001, balance = 200.0 where name = "name05678";
+
+-- 删除索引
+drop index idx01;
+
+-- 验证索引是否被删除
+show index from account;
+
+
+select * from account where balance = 959.09;
+
+建立索引
+create index idx01 on account(balance);
+
+-- 使用索引查询
+select * from account where balance = 959.09;
+
+-- 删除全表
+delete from account;
+
+-- 删除表
+drop table account;
+
+-- 验证表是否被删除
+show tables;
